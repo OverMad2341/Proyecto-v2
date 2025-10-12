@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import AuthenticatedSessionController from '@/actions/App/Http/Controllers/Auth/AuthenticatedSessionController';
 import InputError from '@/components/InputError.vue';
 import TextLink from '@/components/TextLink.vue';
@@ -11,19 +12,38 @@ import { register } from '@/routes';
 import { request } from '@/routes/password';
 import { Form, Head } from '@inertiajs/vue3';
 import { LoaderCircle } from 'lucide-vue-next';
+import VueHcaptcha from '@hcaptcha/vue3-hcaptcha'
 
 defineProps<{
     status?: string;
     canResetPassword: boolean;
 }>();
+
+const showCaptchaModal = ref(false);
+const captchaToken = ref<string | null>(null);
+const formRef = ref<any>(null);
+
+function onLoginClick(e: Event) {
+    e.preventDefault();
+    showCaptchaModal.value = true;
+}
+
+function onCaptchaVerified(token: string) {
+    captchaToken.value = token;
+    showCaptchaModal.value = false;
+}
+
+function onCaptchaExpired() {
+    captchaToken.value = null;
+}
 </script>
 
 <template>
     <AuthBase
-        title="Log in to your account"
-        description="Enter your email and password below to log in"
+        title="Ingresa en tu cuenta"
+        description="Coloca tu correo y contrasela para iniciar sesión"
     >
-        <Head title="Log in" />
+        <Head title="Iniciar Sesión" />
 
         <div
             v-if="status"
@@ -33,6 +53,7 @@ defineProps<{
         </div>
 
         <Form
+            ref="formRef"
             v-bind="AuthenticatedSessionController.store.form()"
             :reset-on-success="['password']"
             v-slot="{ errors, processing }"
@@ -40,7 +61,7 @@ defineProps<{
         >
             <div class="grid gap-6">
                 <div class="grid gap-2">
-                    <Label for="email">Email address</Label>
+                    <Label for="email">Correo electronico</Label>
                     <Input
                         id="email"
                         type="email"
@@ -51,19 +72,18 @@ defineProps<{
                         autocomplete="email"
                         placeholder="email@example.com"
                     />
-                    <InputError :message="errors.email" />
                 </div>
 
                 <div class="grid gap-2">
                     <div class="flex items-center justify-between">
-                        <Label for="password">Password</Label>
+                        <Label for="password">Contraseña</Label>
                         <TextLink
                             v-if="canResetPassword"
                             :href="request()"
                             class="text-sm"
                             :tabindex="5"
                         >
-                            Forgot password?
+                            Olvidaste tu Contraseña?
                         </TextLink>
                     </div>
                     <Input
@@ -75,13 +95,13 @@ defineProps<{
                         autocomplete="current-password"
                         placeholder="Password"
                     />
-                    <InputError :message="errors.password" />
+                    <InputError :message="errors.email" />
                 </div>
 
                 <div class="flex items-center justify-between">
                     <Label for="remember" class="flex items-center space-x-3">
                         <Checkbox id="remember" name="remember" :tabindex="3" />
-                        <span>Remember me</span>
+                        <span>Recuerdame</span>
                     </Label>
                 </div>
 
@@ -96,14 +116,32 @@ defineProps<{
                         v-if="processing"
                         class="h-4 w-4 animate-spin"
                     />
-                    Log in
+                    Iniciar Sesión
                 </Button>
             </div>
 
             <div class="text-center text-sm text-muted-foreground">
-                Don't have an account?
-                <TextLink :href="register()" :tabindex="5">Sign up</TextLink>
+                No tienes Cuenta?
+                <TextLink :href="register()" :tabindex="5">Registrate</TextLink>
             </div>
         </Form>
+
+        <!-- Modal para hCaptcha -->
+        <div
+            v-if="showCaptchaModal"
+            class="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
+        >
+            <div class="bg-white dark:bg-gray-900 p-8 rounded-lg shadow-lg flex flex-col items-center">
+                <span class="mb-4 text-lg font-semibold text-gray-800 dark:text-gray-100">Completa el captcha para continuar</span>
+                <VueHcaptcha
+                    sitekey="41283496-4348-4dce-beb8-3eac7418c6f0"
+                    @verify="onCaptchaVerified"
+                    @expired="onCaptchaExpired"
+                />
+                <Button class="mt-4" @click="showCaptchaModal = false" variant="outline">
+                    Cancelar
+                </Button>
+            </div>
+        </div>
     </AuthBase>
 </template>
