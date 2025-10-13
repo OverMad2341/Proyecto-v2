@@ -1,9 +1,5 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { Head, useForm } from '@inertiajs/vue3';
-import VueHcaptcha from '@hcaptcha/vue3-hcaptcha';
-
-// ... (importa tus otros componentes como Button, Input, etc.)
 import AuthenticatedSessionController from '@/actions/App/Http/Controllers/Auth/AuthenticatedSessionController';
 import InputError from '@/components/InputError.vue';
 import TextLink from '@/components/TextLink.vue';
@@ -14,60 +10,54 @@ import { Label } from '@/components/ui/label';
 import AuthBase from '@/layouts/AuthLayout.vue';
 import { register } from '@/routes';
 import { request } from '@/routes/password';
+import { Form, Head, useForm } from '@inertiajs/vue3'; // MODIFICADO: Importa useForm
 import { LoaderCircle } from 'lucide-vue-next';
-
+import VueHcaptcha from '@hcaptcha/vue3-hcaptcha'
 
 defineProps<{
     status?: string;
     canResetPassword: boolean;
 }>();
 
-// --- PUNTO CRÍTICO #1 ---
-// Creamos una instancia del formulario de Inertia que controlaremos nosotros.
-// Es VITAL que incluyas aquí TODOS los campos que se enviarán, incluido el captcha.
+// MODIFICADO: Usamos useForm directamente para tener una instancia que podamos controlar.
+// ¡Asegúrate de añadir 'h-captcha-response'!
 const form = useForm({
     email: '',
     password: '',
     remember: false,
-    'h-captcha-response': '', // El token del captcha se guardará aquí.
+    'h-captcha-response': '',
 });
 
 const showCaptchaModal = ref(false);
 
-// --- PUNTO CRÍTICO #2 ---
-// Esta función se ejecutará cuando se intente enviar el formulario.
-// Previene el envío al backend y en su lugar, abre nuestro modal.
-const handleLoginAttempt = () => {
-    // Para depurar: Abre la consola de tu navegador (F12) y verifica que este mensaje aparece al hacer clic.
-    console.log('Intento de login interceptado. Mostrando captcha...');
+// MODIFICADO: Esta función intercepta el envío del formulario.
+function handleLoginAttempt() {
+    // Abre el modal en lugar de dejar que Inertia envíe el formulario.
     showCaptchaModal.value = true;
-};
+}
 
-// Esta función se ejecuta CUANDO el captcha se resuelve con éxito.
-const onCaptchaVerified = (token: string) => {
-    console.log('Captcha verificado. Enviando formulario al backend...');
-    
-    // 1. Asignamos el token recibido al campo del formulario.
+// MODIFICADO: Esta función se llama después de verificar el captcha.
+function onCaptchaVerified(token: string) {
+    // 1. Asigna el token al objeto del formulario.
     form['h-captcha-response'] = token;
-    
-    // 2. Cerramos el modal.
+
+    // 2. Cierra el modal.
     showCaptchaModal.value = false;
 
-    // 3. AHORA SÍ, enviamos el formulario al backend usando Inertia.
+    // 3. Envía el formulario de Inertia.
     form.post(AuthenticatedSessionController.store.url(), {
-        // Esto es opcional, pero es buena práctica limpiar la contraseña después de un envío.
         onFinish: () => form.reset('password'),
     });
-};
+}
 
-const onCaptchaExpired = () => {
+function onCaptchaExpired() {
     form['h-captcha-response'] = '';
-};
+}
 </script>
 
 <template>
-    <AuthBase 
-        title="Ingresa en tu cuenta" 
+    <AuthBase
+        title="Ingresa en tu cuenta"
         description="Coloca tu correo y contrasela para iniciar sesión"
     >
         <Head title="Iniciar Sesión" />
@@ -76,19 +66,26 @@ const onCaptchaExpired = () => {
             {{ status }}
         </div>
 
-        <form @submit.prevent="handleLoginAttempt" class="flex flex-col gap-6">
+        <Form
+            :form="form"
+            @submit.prevent="handleLoginAttempt"
+            :reset-on-success="['password']"
+            v-slot="{ errors, processing }"
+            class="flex flex-col gap-6"
+        >
             <div class="grid gap-6">
                 <div class="grid gap-2">
                     <Label for="email">Correo electronico</Label>
                     <Input
                         id="email"
                         type="email"
-                        v-model="form.email" required
+                        name="email"
+                        required
                         autofocus
+                        :tabindex="1"
                         autocomplete="email"
                         placeholder="email@example.com"
                     />
-                    <InputError :message="form.errors.email" />
                 </div>
 
                 <div class="grid gap-2">
@@ -106,32 +103,43 @@ const onCaptchaExpired = () => {
                     <Input
                         id="password"
                         type="password"
-                        v-model="form.password" required
+                        name="password"
+                        required
+                        :tabindex="2"
                         autocomplete="current-password"
                         placeholder="Password"
                     />
-                    <InputError :message="form.errors.password" />
-                    
-                    <InputError :message="form.errors['h-captcha-response']" />
+                    <InputError :message="errors.email" />
+                    <InputError :message="errors['h-captcha-response']" />
                 </div>
 
-                <div class="flex items-center">
-                    <Checkbox id="remember" name="remember" v-model:checked="form.remember" />
-                    <Label for="remember" class="ml-2 text-sm">Recuérdame</Label>
+                <div class="flex items-center justify-between">
+                    <Label for="remember" class="flex items-center space-x-3">
+                        <Checkbox id="remember" name="remember" :tabindex="3" />
+                        <span>Recuerdame</span>
+                    </Label>
                 </div>
 
-                <Button type="submit" class="w-full" :disabled="form.processing">
-                    <LoaderCircle v-if="form.processing" class="mr-2 h-4 w-4 animate-spin" />
+                <Button
+                    type="submit"
+                    class="mt-4 w-full"
+                    :tabindex="4"
+                    :disabled="processing"
+                    data-test="login-button"
+                >
+                    <LoaderCircle
+                        v-if="processing"
+                        class="h-4 w-4 animate-spin"
+                    />
                     Iniciar Sesión
                 </Button>
-                
             </div>
+
             <div class="text-center text-sm text-muted-foreground">
                 No tienes Cuenta?
                 <TextLink :href="register()" :tabindex="5">Registrate</TextLink>
             </div>
-            
-            </form>
+        </Form>
 
         <div v-if="showCaptchaModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
             <div class="bg-white dark:bg-gray-900 p-8 rounded-lg shadow-lg flex flex-col items-center">
