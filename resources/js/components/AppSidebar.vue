@@ -11,10 +11,21 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { dashboard } from '@/routes';
+import { 
+    dashboard,
+
+} from '@/routes';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-vue-next';
+import { 
+    BookOpen, 
+    BookMarked, 
+    LayoutGrid, 
+    TextCursorInput,
+    ClipboardList,
+    ScanLine,
+    ChartNoAxesCombined,
+} from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
 
 const mainNavItems: NavItem[] = [
@@ -23,16 +34,36 @@ const mainNavItems: NavItem[] = [
         href: dashboard(),
         icon: LayoutGrid,
     },
+    {
+        title: 'Ejemplo',
+        href: '',
+        icon: TextCursorInput,
+    },
+    {
+        title: 'Ejemplo',
+        href: '',
+        icon: ClipboardList,
+    },
+    {
+        title: 'Ejemplo',
+        href: '',
+        icon: ChartNoAxesCombined,
+    },
+    {
+        title: 'Ejemplo',
+        href: '',
+        icon: ScanLine,
+    },
 ];
 
 const footerNavItems: NavItem[] = [
     {
-        title: 'Github Repo',
-        href: '',
-        icon: Folder,
+        title: 'UPETEC-MS',
+        href: 'https://www.instagram.com/uptecms_dgc/?hl=es',
+        icon: BookMarked,
     },
     {
-        title: 'Documentation',
+        title: 'Documentacion',
         href: '',
         icon: BookOpen,
     },
