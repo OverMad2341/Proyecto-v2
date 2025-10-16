@@ -13,6 +13,7 @@ import {
 } from '@/components/ui/sidebar';
 import { 
     dashboard,
+    activos,
 
 } from '@/routes';
 import { type NavItem } from '@/types';
@@ -35,8 +36,8 @@ const mainNavItems: NavItem[] = [
         icon: LayoutGrid,
     },
     {
-        title: 'Ejemplo',
-        href: '',
+        title: 'Activos',
+        href: activos(),
         icon: TextCursorInput,
     },
     {
