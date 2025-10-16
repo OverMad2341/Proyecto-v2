@@ -1,5 +1,5 @@
 <template>
-  <Doughnut class="mx-auto" id="my-chart-id" :options="chartOptions" :data="chartData" />
+  <Doughnut class="mx-auto my-2" id="my-chart-id" :options="chartOptions" :data="chartData" />
 </template>
 
 <script>
@@ -19,7 +19,7 @@ export default {
           {
             label: 'vue',
             data: [100, 20, 50, 20, 10, 2],
-            hoverOffset: 5
+            hoverOffset: 5,
           },
 
         ],
