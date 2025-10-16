@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use Faker\Provider\sv_SE\Municipality;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -16,8 +17,16 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
         $this->call([
         CountrySeeder::class,
-        // UsersSeeder::class,
+        UsersSeeder::class,
         FederalStateSeeder::class,
+        municipalitySeeder::class,
+        parishSeeder::class,
+        LocationSeeder::class,
+        OrganizationalUniSeeder::class,
+        TeamSeeder::class,
+        PersonSeeder::class,
+        EmployerSeeder::class,
+        AgentSeeder::class,
     ]);
         // User::factory()->create([
         //     'name' => 'Mara',

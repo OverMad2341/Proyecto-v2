@@ -22,18 +22,15 @@ class UsersSeeder extends Seeder
                 'name_02' => 'Josue',
                 'surname_01' => 'Silva',
                 'surname_02' => 'Zurita',
-                'birth_date' => '1998-05-22',
+                'birth_date' => '1990-04-15',
                 'birth_place' => 'Caracas',
                 'sex' => 'M',
                 'nationality' => 'Venezolano',
-                'email' => 'isaac@example.com',
-                'email_verified_at' => now(),
-                'password' => Hash::make('12345678'), // 🔒 contraseña encriptada
-                'birth_country' => 1, // Debe existir un país con id=1 (Venezuela)
+                'email' => 'isaac@gmail.com',
+                'password' => Hash::make('12345678'),
+                'birth_country' => 1,
                 'current_team_id' => null,
                 'profile_photo_path' => null,
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
         ]);
     }
