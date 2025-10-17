@@ -25,9 +25,9 @@ const breadcrumbs: BreadcrumbItem[] = [
 
       <!-- Lista de activos -->
       <Link
-        class="relative min-h-[100vh] flex-1 rounded-xl border border-sidebar-border/70 md:min-h-min dark:border-sidebar-border">
+        class="relative min-h-[100vh] flex-1 rounded-xl border border-sidebar-border/70 md:min-h-min dark:border-sidebar-border group">
         <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0">
-          <img src="/iconcnti.svg" alt="Logo CNTI" class="opacity-25">
+          <img src="/iconcnti.svg" alt="Logo CNTI" class="opacity-25 group-hover:scale-115 transition-all delay-150 duration-300 ease-in-out">
         </div>
         <div class="relative z-10 min-h-[100vh] flex items-center justify-center">
           <div class="flex flex-col items-center text-center w-full max-w-2xl mx-auto">
@@ -45,10 +45,10 @@ const breadcrumbs: BreadcrumbItem[] = [
 
       <!-- Crear o Modificar activos -->
       <Link
-        class="relative min-h-[100vh] flex-1 rounded-xl border border-sidebar-border/70 md:min-h-min dark:border-sidebar-border">
+        class="relative min-h-[100vh] flex-1 rounded-xl border border-sidebar-border/70 md:min-h-min dark:border-sidebar-border group">
 
         <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0">
-          <img src="/iconcnti.svg" alt="Logo CNTI" class="opacity-25">
+          <img src="/iconcnti.svg" alt="Logo CNTI" class="opacity-25 group-hover:scale-115 transition-all delay-150 duration-300 ease-in-out">
         </div>
         <div class="relative z-10 min-h-[100vh] flex items-center justify-center">
           <div class="flex flex-col items-center text-center w-full max-w-2xl mx-auto">
@@ -66,9 +66,9 @@ const breadcrumbs: BreadcrumbItem[] = [
 
       <!-- Exportar activos -->
       <Link
-        class="relative min-h-[100vh] flex-1 rounded-xl border border-sidebar-border/70 md:min-h-min dark:border-sidebar-border">
+        class="relative min-h-[100vh] flex-1 rounded-xl border border-sidebar-border/70 md:min-h-min dark:border-sidebar-border group">
         <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0">
-          <img src="/iconcnti.svg" alt="Logo CNTI" class="opacity-25">
+          <img src="/iconcnti.svg" alt="Logo CNTI" class="opacity-25 group-hover:scale-115 transition-all delay-150 duration-300 ease-in-out">
         </div>
         <div class="relative z-10 min-h-[100vh] flex items-center justify-center">
           <div class="flex flex-col items-center text-center w-full max-w-2xl mx-auto">
