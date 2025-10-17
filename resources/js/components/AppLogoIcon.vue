@@ -13,5 +13,5 @@ defineProps<Props>();
 </script>
 
 <template>
-    <img src="/iconcnti.svg" alt="Logo CNTI" class="p-1 ">
+    <img src="/iconcnti.svg" alt="Logo CNTI" class="p-1">
 </template>
