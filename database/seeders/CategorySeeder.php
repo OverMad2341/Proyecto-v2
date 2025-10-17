@@ -6,51 +6,47 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
-class EmployerSeeder extends Seeder
+
+class CategorySeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        DB::table('employee')->insert([
+        DB::table('category')->insert([
             [
-                'position' => 'Analista de Sistemas',
+                'category_name' => 'Hardware',
+                'description' => 'Componentes físicos de equipos y sistemas informáticos.',
                 'is_active' => true,
-                'organizational_uni' => 1,
-                'users' => 30313815,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
             [
-                'position' => 'Técnico de Soporte',
+                'category_name' => 'Software',
+                'description' => 'Programas y aplicaciones instaladas en los equipos.',
                 'is_active' => true,
-                'organizational_uni' => 1,
-                'users' => 27654982,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
             [
-                'position' => 'Coordinador de TI',
+                'category_name' => 'Periféricos',
+                'description' => 'Dispositivos externos como impresoras, teclados o ratones.',
                 'is_active' => true,
-                'organizational_uni' => 1,
-                'users' => 31845269,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
             [
-                'position' => 'Administrador de Red',
+                'category_name' => 'Redes',
+                'description' => 'Equipos y accesorios utilizados para la conectividad de red.',
                 'is_active' => true,
-                'organizational_uni' => 1,
-                'users' => 29401654,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
             [
-                'position' => 'Soporte Técnico',
-                'is_active' => false,
-                'organizational_uni' => 1,
-                'users' => 26548397,
+                'category_name' => 'Consumibles',
+                'description' => 'Materiales de uso continuo como tinta, papel o cables.',
+                'is_active' => true,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],

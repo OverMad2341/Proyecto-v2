@@ -27,6 +27,13 @@ class DatabaseSeeder extends Seeder
         PersonSeeder::class,
         EmployerSeeder::class,
         AgentSeeder::class,
+        CategorySeeder::class,     
+        SubcategorySeeder::class,
+        SupplierSeeder::class,
+        NationalAssetSeeder::class,
+        DepreciationSeeder::class,
+        NationalAssetAssignamentSeeder::class,
+        MovementHistorySeeder::class,
     ]);
         // User::factory()->create([
         //     'name' => 'Mara',

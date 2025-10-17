@@ -16,7 +16,7 @@ return new class extends Migration
             
             $table->unsignedBigInteger('id_bien');
             $table->unsignedBigInteger('id_organizational_uni');
-           $table->unsignedBigInteger('id_made_by');
+            $table->unsignedBigInteger('id_made_by');
 
 
             $table->foreign('id_bien')
@@ -29,7 +29,7 @@ return new class extends Migration
                 ->on('organizational_uni')
                 ->onDelete('restrict');
 
-             $table->foreign('id_made_by')
+            $table->foreign('id_made_by')
                 ->references('id')
                 ->on('employee')
                 ->onDelete('restrict');
