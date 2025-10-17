@@ -1,5 +1,5 @@
 <template>
-  <Bar id="my-chart-id" :options="chartOptions" :data="chartData" />
+  <Bar class="relative justify-center my-2.5" id="my-chart-id" :options="chartOptions" :data="chartData" />
 </template>
 
 <script>
@@ -24,7 +24,7 @@ export default {
           {
             label: 'React',
             data: [12, 23, 50, 25, 9, 5],
-          } 
+          },
         ],
 
       },
@@ -33,7 +33,7 @@ export default {
         plugins: {
           colors: {
             enabled: true
-          }
+          },
         }
       }
     }
