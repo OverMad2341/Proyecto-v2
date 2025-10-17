@@ -23,11 +23,9 @@ return new class extends Migration
             $table->unsignedBigInteger('id_bien');
 
             $table->foreign('id_bien')
-                  ->references('id_bien')
-                  ->on('national_asset')
-                  ->cascadeOnDelete();
-
-           
+                ->references('id_bien')
+                ->on('national_asset')
+                ->cascadeOnDelete();
         });
     }
 
