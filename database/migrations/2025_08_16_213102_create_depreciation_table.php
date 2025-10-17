@@ -23,19 +23,6 @@ return new class extends Migration
             $table->unsignedBigInteger('id_bien');
 
             $table->foreign('id_bien')
-                  ->references('id_bien')
-                  ->on('national_asset')
-                  ->cascadeOnDelete();
-
-           
-        });
-    }
-
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('depreciation');
-    }
-};
+                ->references('id_bien')
+                ->on('national_asset')
+                ->cascadeOnDelete();

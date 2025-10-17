@@ -11,5 +11,10 @@ Route::get('dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('Activos', function () {
+    return Inertia::render('Activos');
+})->middleware(['auth', 'verified'])->name('activos');
+
+
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';
