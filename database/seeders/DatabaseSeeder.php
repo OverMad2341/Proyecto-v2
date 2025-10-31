@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Empleados;
 use App\Models\User;
 use Faker\Provider\sv_SE\Municipality;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -14,39 +15,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        Empleados::factory(10)->create();
+        
         $this->call([
-        CountrySeeder::class,
         UsersSeeder::class,
-        FederalStateSeeder::class,
-        municipalitySeeder::class,
-        parishSeeder::class,
-        LocationSeeder::class,
-        OrganizationalUniSeeder::class,
-        TeamSeeder::class,
-        PersonSeeder::class,
-        EmployerSeeder::class,
-        AgentSeeder::class,
-        CategorySeeder::class,     
-        SubcategorySeeder::class,
-        SupplierSeeder::class,
-        NationalAssetSeeder::class,
-        DepreciationSeeder::class,
-        NationalAssetAssignamentSeeder::class,
-        MovementHistorySeeder::class,
+        CategoriasSeeder::class,
+        GerenciasSeeder::class,
+        
     ]);
-        // User::factory()->create([
-        //     'name' => 'Mara',
-        //     'name_02' => 'Alexandra',
-        //     'surname_01' => 'Herrera',
-        //     'surname_02' => 'Conquista',
-        //     'cedula' => '12345678',
-        //     'birth_date' => '1990-01-01',
-        //     'birth_place' => 'Caracas',
-        //     'sex' => 'M',
-        //     'nationality' => 'Venezolana',
-        //     'email' => 'admin@example.com',
-        //     'password' => bcrypt('password'), 
-        // ]);
     }
 }

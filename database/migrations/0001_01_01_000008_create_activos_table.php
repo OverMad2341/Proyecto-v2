@@ -11,13 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('municipality', function (Blueprint $table) {
+        Schema::create('activos', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('name', 50)->unique();
-            $table->unsignedBigInteger('federal_state_id');
-            
-            $table->foreign('federal_state_id')->references('id')->on('federal_state')->onDelete('cascade');
         });
     }
 
@@ -26,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('municipality');
+        Schema::dropIfExists('activos');
     }
 };

@@ -13,7 +13,11 @@ Route::get('dashboard', function () {
 
 Route::get('Activos', function () {
     return Inertia::render('Activos');
-})->middleware(['auth', 'verified'])->name('activos');
+})->middleware(['auth', 'verified'])->name('Activos');
+
+Route::get('Activos/ListaActivos', function () {
+    return Inertia::render('activos/List');
+})->name('ListaActivos');
 
 
 require __DIR__.'/settings.php';

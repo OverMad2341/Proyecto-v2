@@ -11,16 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('federal_state', function (Blueprint $table) {
+        Schema::create('subcategorias', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('name', 50)->unique();
-            $table->unsignedBigInteger('country_id');
-            
-            $table->foreign('country_id')
-            ->references('id')
-            ->on('country')
-            ->onDelete('cascade');
         });
     }
 
@@ -29,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('federal_state');
+        Schema::dropIfExists('subcategorias');
     }
 };
