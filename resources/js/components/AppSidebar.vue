@@ -13,19 +13,19 @@ import {
 } from '@/components/ui/sidebar';
 import { 
     dashboard,
-    activos,
+    Activos,
 
 } from '@/routes';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
-import { 
-    BookOpen, 
+import {
     BookMarked, 
-    LayoutGrid, 
-    TextCursorInput,
+    LayoutGrid,
+    CircuitBoard,
     ClipboardList,
-    ScanLine,
-    ChartNoAxesCombined,
+    Atom,
+    Armchair,
+    Server,
 } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
 
@@ -37,23 +37,28 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'Activos',
-        href: activos(),
-        icon: TextCursorInput,
-    },
-    {
-        title: 'Ejemplo',
-        href: '',
+        href: Activos(),
         icon: ClipboardList,
     },
     {
-        title: 'Ejemplo',
+        title: 'Componentes',
         href: '',
-        icon: ChartNoAxesCombined,
+        icon: Atom,
     },
     {
-        title: 'Ejemplo',
+        title: 'Equipos de red',
         href: '',
-        icon: ScanLine,
+        icon: CircuitBoard,
+    },
+    {
+        title: 'Inmuebles',
+        href: '',
+        icon: Armchair,
+    },
+    {
+        title: 'Servidores',
+        href: '',
+        icon: Server,
     },
 ];
 
@@ -62,11 +67,6 @@ const footerNavItems: NavItem[] = [
         title: 'UPETEC-MS',
         href: 'https://www.instagram.com/uptecms_dgc/?hl=es',
         icon: BookMarked,
-    },
-    {
-        title: 'Documentacion',
-        href: '',
-        icon: BookOpen,
     },
 ];
 </script>
