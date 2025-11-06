@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('empleados', function (Blueprint $table) {
             $table->id();
+            $table->integer('cedula')->nullable();
+            $table->string('name', 100)->nullable();
+            $table->string('surname', 100)->nullable();
+            $table->string('email', 100)->nullable();
+            $table->integer('phone')->nullable();
             $table->timestamps();
         });
     }
