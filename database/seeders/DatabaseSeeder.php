@@ -21,6 +21,8 @@ class DatabaseSeeder extends Seeder
         UsersSeeder::class,
         CategoriasSeeder::class,
         GerenciasSeeder::class,
+        SubcategoriaSeeder::class,
+        SubsubcategoriaSeeder::class,
         
     ]);
     }
