@@ -17,7 +17,11 @@ class EmpleadosFactory extends Factory
     public function definition(): array
     {
         return [
-            
+            'cedula' => $this->faker->numberBetween(18000000, 30000000),
+            'name' => $this->faker->firstName(),
+            'surname' => $this->faker->lastName(),
+            'email' => $this->faker->unique()->safeEmail(),
+            'phone' => $this->faker->phoneNumber(),
         ];
     }
 }
