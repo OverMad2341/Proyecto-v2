@@ -26,7 +26,7 @@ const breadcrumbs: BreadcrumbItem[] = [
                     class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border bg-white/50 dark:bg-black/40">
                     <div class="h-full w-full flex flex-col items-center justify-center p-6 text-center">
                         <h3 class="text-sm font-medium text-sidebar-text/90 dark:text-sidebar-text">Bienes Nacionales</h3>
-                        <div class="mt-3 text-5xl font-extrabold leading-none text-primary">1,234</div>
+                        <div class="mt-3 text-5xl font-extrabold leading-none text-primary">0</div>
                         <p class="mt-2 text-sm text-[#292929]">Total registrado</p>
                     </div>
                 </div>
@@ -36,7 +36,7 @@ const breadcrumbs: BreadcrumbItem[] = [
                     class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border bg-white/50 dark:bg-black/40">
                     <div class="h-full w-full flex flex-col items-center justify-center p-6 text-center">
                         <h3 class="text-sm font-medium text-sidebar-text/90 dark:text-sidebar-text">En uso</h3>
-                        <div class="mt-3 text-5xl font-extrabold leading-none text-emerald-600">892</div>
+                        <div class="mt-3 text-5xl font-extrabold leading-none text-emerald-600">0</div>
                         <p class="mt-2 text-sm text-[#292929]">Actualmente asignados</p>
                     </div>
                 </div>
@@ -46,7 +46,7 @@ const breadcrumbs: BreadcrumbItem[] = [
                     class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border bg-white/50 dark:bg-black/40">
                     <div class="h-full w-full flex flex-col items-center justify-center p-6 text-center">
                         <h3 class="text-sm font-medium text-sidebar-text/90 dark:text-sidebar-text">En almacén</h3>
-                        <div class="mt-3 text-5xl font-extrabold leading-none text-amber-600">342</div>
+                        <div class="mt-3 text-5xl font-extrabold leading-none text-amber-600">0</div>
                         <p class="mt-2 text-sm text-[#292929]">Disponibles en inventario</p>
                     </div>
                 </div>

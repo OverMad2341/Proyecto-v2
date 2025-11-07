@@ -1,46 +1,87 @@
 <script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue';
-import { Activos, ListaActivos } from '@/routes';
-import { type BreadcrumbItem } from '@/types';
-import { Form, Head } from '@inertiajs/vue3';
-import { Link } from '@inertiajs/vue3';
-import { usePage } from '@inertiajs/vue3';
+import { Activo, type BreadcrumbItem, type AppPageProps } from '@/types';
+import { Head, usePage, Link, router } from '@inertiajs/vue3';
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table'
+import { Button } from '@/components/ui/button';
+import { Pencil } from 'lucide-vue-next';
+import { computed } from 'vue';
 
-interface Activo {
-  nombre: string;
-  tipo: string;
-  estado: string;
-  ubicacion: string;
+interface ActivoPageProps extends AppPageProps {
+    activos: Activo[];
 }
 
+const props = usePage<ActivoPageProps>().props;
+const activos = computed(() => props.activos);
+
 const breadcrumbs: BreadcrumbItem[] = [
-    {
-        title: 'Lista de activos',
-        href: ListaActivos().url,
-    },
+  {
+    title: 'Activos',
+    href: '/Activos',
+  },
+  {
+    title: 'Lista de activos',
+    href: '/ListaActivos',
+  },
 ];
 
-const activosList = (usePage().props.activos as Activo[]) ?? [];
 </script>
 
 <template>
     <Head title="Listas de activos" />
     <AppLayout :breadcrumbs="breadcrumbs">
-        <div class="w-full max-w-3xl mx-auto mt-8">
-            <h2 class="text-2xl font-bold mb-4 text-center">Activos de la empresa</h2>
-            <ul class="divide-y divide-gray-200 rounded-xl border border-gray-200 bg-white shadow">
-                <li v-if="activosList.length === 0" class="p-6 text-center text-gray-500">No hay activos registrados.</li>
-                <li v-for="(activo, idx) in activosList" :key="idx" class="p-6 flex flex-col md:flex-row md:items-center gap-2">
-                    <div class="flex-1">
-                        <div class="font-semibold text-lg">{{ activo.nombre }}</div>
-                        <div class="text-sm text-gray-500">Tipo: {{ activo.tipo }}</div>
-                    </div>
-                    <div class="flex-1">
-                        <div class="text-sm">Estado: <span class="font-medium text-emerald-700">{{ activo.estado }}</span></div>
-                        <div class="text-sm">Ubicación: <span class="font-medium text-blue-700">{{ activo.ubicacion }}</span></div>
-                    </div>
-                </li>
-            </ul>
+        <div class="relative min-h-screen flex-1 rounded-xl text-center border border-sidebar-border/70 dark:border-sidebar-border md:min-h-min m-4">
+            <Table>
+                <TableCaption>Lista de activos</TableCaption>
+                <TableHeader>
+                    <TableRow>
+                        <TableHead>Código</TableHead>
+                        <TableHead>Nombre</TableHead>
+                        <TableHead>Marca</TableHead>
+                        <TableHead>Modelo</TableHead>
+                        <TableHead>Serial</TableHead>
+                        <TableHead>Color</TableHead>
+                        <TableHead>Empleado</TableHead>
+                        <TableHead>Ubicación</TableHead>
+                        <TableHead>Categoria</TableHead>
+                        <TableHead>Estado</TableHead>
+                        <TableHead class="text-center">Editar</TableHead>
+                    </TableRow>
+                </TableHeader>
+                <TableBody>
+                    <TableRow v-for="activo in activos" :key="activo.id">
+                        <TableCell>{{ activo.codigo ?? 'No tiene' }}</TableCell>
+                        <TableCell>{{ activo.name }}</TableCell>
+                        <TableCell>{{ activo.marca }}</TableCell>
+                        <TableCell>{{ activo.modelo }}</TableCell>
+                        <TableCell>{{ activo.serial ?? 'No tiene' }}</TableCell>
+                        <TableCell>{{ activo.color ?? 'No tiene' }}</TableCell>
+                        <TableCell>{{ activo.empleado }}</TableCell>
+                        <TableCell>{{ activo.ubicacion }}</TableCell>
+                        <TableCell>{{ activo.categoria_id }}</TableCell>
+                        <TableCell>{{ activo.estado }}</TableCell>
+                        <TableCell>
+                            <Button
+                                as-child
+                                variant="outline"
+                                size="sm"
+                            >
+                                <Link :href="`/Activos/${activo.id}/edit`">
+                                    <Pencil class="h-4 w-4" />
+                                </Link>
+                            </Button>
+                        </TableCell>
+                    </TableRow>
+                </TableBody>
+            </Table>
         </div>
     </AppLayout>
 </template>

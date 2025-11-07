@@ -9,6 +9,18 @@ import AuthBase from '@/layouts/AuthLayout.vue';
 import { login } from '@/routes';
 import { Form, Head } from '@inertiajs/vue3';
 import { LoaderCircle } from 'lucide-vue-next';
+
+/**
+ * Bloquea la funcionalidad predeterminada de las teclas Flecha Arriba y Flecha Abajo
+ * en un input, evitando que el valor numérico incremente o decremente.
+ * @param {KeyboardEvent} event
+ */
+function bloquearFlechasTeclado(event: KeyboardEvent) {
+    // Usamos 'key' en lugar de 'keyCode' para mayor compatibilidad y claridad
+    if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
+        event.preventDefault(); // Evita la acción predeterminada del navegador
+    }
+}
 </script>
 
 <template>
@@ -86,12 +98,16 @@ import { LoaderCircle } from 'lucide-vue-next';
                     <Label for="cedula">Cédula</Label>
                     <Input
                         id="cedula"
-                        type="text"
+                        type="number"
                         required
                         :tabindex="5"
+                        :min="0"
                         autocomplete="cedula"
                         name="cedula"
                         placeholder="Cédula"
+                        maxlength="8" 
+                        oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                        @keydown="bloquearFlechasTeclado"
                     />
                     <InputError :message="errors.cedula" />
                 </div>
@@ -105,7 +121,10 @@ import { LoaderCircle } from 'lucide-vue-next';
                         :tabindex="6"
                         autocomplete="birth_date"
                         name="birth_date"
+                        :max="new Date().toISOString().split('T')[0]"
+                        :min="new Date(new Date().setFullYear(new Date().getFullYear() - 80)).toISOString().split('T')[0]"
                         placeholder="Fecha de nacimiento"
+                        @keydown.prevent
                     />
                     <InputError :message="errors.birth_date" />
                 </div>
@@ -131,7 +150,7 @@ import { LoaderCircle } from 'lucide-vue-next';
                         name="sex"
                         required
                         :tabindex="8"
-                        class="border rounded px-3 py-2"
+                        class="border rounded px-3 py-2 dark:focus:bg-black"
                     >
                         <option value="">Seleccione...</option>
                         <option value="M">Masculino</option>
@@ -224,3 +243,17 @@ import { LoaderCircle } from 'lucide-vue-next';
         </Form>
     </AuthBase>
 </template>
+
+<style scoped>
+/* Para Chrome, Safari, Edge, y la mayoría de los navegadores basados en Webkit */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0; /* Necesario para que Safari y Edge no añadan padding/margin */
+}
+
+/* Para Firefox */
+input[type="number"] {
+  -moz-appearance: textfield; /* Lo fuerza a renderizarse como un campo de texto normal */
+}
+</style>

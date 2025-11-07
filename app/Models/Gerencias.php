@@ -6,5 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Gerencias extends Model
 {
-    //
+    protected $table = 'gerencias';
+    
+    protected $fillable = [
+        'name',
+    ];
 }

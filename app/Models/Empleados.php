@@ -8,5 +8,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Empleados extends Model
 {
     use HasFactory;
-    //
+    protected $table = 'empleados';
+    protected $fillable = [
+        'cedula',
+        'name',
+        'surname',
+        'email',
+        'phone',
+    ];
 }

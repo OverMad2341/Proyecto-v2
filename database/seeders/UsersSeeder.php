@@ -41,7 +41,7 @@ class UsersSeeder extends Seeder
                 'birth_place' => 'Caracas',
                 'sex' => 'M',
                 'nationality' => 'Venezolana',
-                'email' => 'admin23@gmail.com',
+                'email' => 'admin23@cnti.gob.ve',
                 'password' => Hash::make('12345678'),
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),

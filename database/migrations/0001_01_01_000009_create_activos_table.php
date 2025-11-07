@@ -43,7 +43,7 @@ return new class extends Migration
             $table->unsignedBigInteger('sub_subcategoria_id');
             $table->foreign('sub_subcategoria_id')
                 ->references('id')
-                ->on('sub_subcategorias')
+                ->on('subsubcategorias')
                 ->onDelete('cascade');
             $table->string('description', 255);
             $table->timestamps();

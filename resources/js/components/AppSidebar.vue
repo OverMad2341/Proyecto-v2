@@ -11,54 +11,25 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { 
-    dashboard,
-    Activos,
-
-} from '@/routes';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
 import {
     BookMarked, 
     LayoutGrid,
-    CircuitBoard,
     ClipboardList,
-    Atom,
-    Armchair,
-    Server,
 } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
 
 const mainNavItems: NavItem[] = [
     {
         title: 'Dashboard',
-        href: dashboard(),
+        href: '/dashboard',
         icon: LayoutGrid,
     },
     {
         title: 'Activos',
-        href: Activos(),
+        href: '/Activos',
         icon: ClipboardList,
-    },
-    {
-        title: 'Componentes',
-        href: '',
-        icon: Atom,
-    },
-    {
-        title: 'Equipos de red',
-        href: '',
-        icon: CircuitBoard,
-    },
-    {
-        title: 'Inmuebles',
-        href: '',
-        icon: Armchair,
-    },
-    {
-        title: 'Servidores',
-        href: '',
-        icon: Server,
     },
 ];
 
@@ -77,7 +48,7 @@ const footerNavItems: NavItem[] = [
             <SidebarMenu>
                 <SidebarMenuItem>
                     <SidebarMenuButton size="lg" as-child>
-                        <Link :href="dashboard()">
+                        <Link :href="'/dashboard'">
                             <AppLogo />
                         </Link>
                     </SidebarMenuButton>

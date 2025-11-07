@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { Head, useForm } from '@inertiajs/vue3';
 import VueHcaptcha from '@hcaptcha/vue3-hcaptcha';
 
@@ -63,6 +63,7 @@ const onCaptchaVerified = (token: string) => {
 const onCaptchaExpired = () => {
     form['h-captcha-response'] = '';
 };
+
 </script>
 
 <template>

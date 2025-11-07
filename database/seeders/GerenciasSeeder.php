@@ -20,9 +20,12 @@ class GerenciasSeeder extends Seeder
             ['name' => 'Gerencia de Formación'],
             ['name' => 'Gerencia de Finanzas'],
             ['name' => 'Gerencia de Atención al Estado'],
-            ['name' => 'Gerencia de Proyectos'],
-            ['name' => 'Gerencia de Asuntos Jurídicos'],
             ['name' => 'Gerencia de Comunicaciones y Relaciones Internas'],
+            ['name' => 'Gerencia de Presupuesto'],
+            ['name' => 'Gerencia de Proyecto'],
+            ['name' => 'Gerencia de Atención al Cuidadano'],
+            ['name' => 'Gerencia de Consultoria Juridica'],
+            ['name' => 'Gerencia de Modelado de Procesos'],
             ['name' => 'Presidencia'],
         ]);
     }

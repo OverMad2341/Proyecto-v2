@@ -37,3 +37,19 @@ export interface User {
 }
 
 export type BreadcrumbItemType = BreadcrumbItem;
+
+export interface Activo {
+    id: number;
+    codigo: string | null;
+    name: string;
+    serial: string | null;
+    marca: string;
+    modelo: string;
+    color: string | null;
+    estado: string;
+    empleado: number;
+    ubicacion: string;
+    categoria_id: number;
+    subcategoria_id: number;
+    sub_subcategoria_id: number;
+}
