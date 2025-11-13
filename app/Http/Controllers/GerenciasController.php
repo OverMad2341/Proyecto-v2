@@ -12,7 +12,9 @@ class GerenciasController extends Controller
      */
     public function index()
     {
-        //
+        $ubicacion = Gerencias::select('id', 'name' )->orderBy('name')->get();
+
+        return response()->json($ubicacion);
     }
 
     /**

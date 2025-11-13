@@ -42,14 +42,28 @@ export interface Activo {
     id: number;
     codigo: string | null;
     name: string;
-    serial: string | null;
+    serial?: string | null;
     marca: string;
     modelo: string;
-    color: string | null;
+    color?: string | null;
     estado: string;
     empleado: number;
     ubicacion: string;
     categoria_id: number;
     subcategoria_id: number;
     sub_subcategoria_id: number;
+}
+
+export interface Empleado {
+    id: number;
+    cedula?: string;
+    name: string;
+    surname?: string | null;
+    email?: string | null;
+    phone?: string | null;
+}
+
+export interface Ubicacion {
+    id: number;
+    name: string;
 }

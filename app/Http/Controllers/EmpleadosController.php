@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Empleados;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Response;
+
 class EmpleadosController extends Controller
 {
     /**
@@ -12,7 +14,11 @@ class EmpleadosController extends Controller
      */
     public function index()
     {
-        //
+        // Devuelve una lista simple de empleados en JSON
+        // Seleccionamos solo los campos necesarios para el select
+        $empleados = Empleados::select('id', 'name', 'surname', 'cedula')->orderBy('name')->get();
+
+        return response()->json($empleados);
     }
 
     /**
@@ -36,7 +42,7 @@ class EmpleadosController extends Controller
      */
     public function show(Empleados $empleados)
     {
-        //
+        
     }
 
     /**

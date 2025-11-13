@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ActivosController;
+use App\Http\Controllers\EmpleadosController;
+use App\Http\Controllers\GerenciasController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -23,6 +25,9 @@ Route::middleware('auth', 'verified')->group(function () {
     Route::get('/Activos/{activo}/edit', [ActivosController::class, 'edit'])->name('activos.edit');
     Route::put('/Activos/{activo}', [ActivosController::class, 'update'])->name('activos.update');
     Route::delete('/Activos/{activo}', [ActivosController::class, 'destroy'])->name('activos.destroy');
+    // Endpoint para obtener empleados (usado por el formulario de activos)
+    Route::get('/empleados', [EmpleadosController::class, 'index'])->name('empleados.index');
+    Route::get('/gerencias', [GerenciasController::class, 'index'])->name('gerencias.index');
 });
 
 
