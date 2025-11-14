@@ -13,6 +13,9 @@ class CategoriaController extends Controller
     public function index()
     {
         //
+        $categorias = Categoria::select('id', 'name')->orderBy('id')->get();
+
+        return response()->json($categorias);
     }
 
     /**

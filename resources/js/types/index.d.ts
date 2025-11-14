@@ -41,7 +41,6 @@ export type BreadcrumbItemType = BreadcrumbItem;
 export interface Activo {
     id: number;
     codigo: string | null;
-    name: string;
     serial?: string | null;
     marca: string;
     modelo: string;
@@ -51,7 +50,7 @@ export interface Activo {
     ubicacion: string;
     categoria_id: number;
     subcategoria_id: number;
-    sub_subcategoria_id: number;
+    subsubcategoria_id: number;
 }
 
 export interface Empleado {
@@ -66,4 +65,21 @@ export interface Empleado {
 export interface Ubicacion {
     id: number;
     name: string;
+}
+
+export interface Categoria {
+    id: number;
+    name: string;
+}
+
+export interface SubCategoria {
+    id: number;
+    name: string;
+    categoria_id: number;
+}
+
+export interface SubSubCategoria {
+    id: number;
+    name: string;
+    subcategoria_id: number;
 }

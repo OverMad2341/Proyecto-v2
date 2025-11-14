@@ -13,6 +13,9 @@ class SubSubcategoriaController extends Controller
     public function index()
     {
         //
+        $subsubcategorias = SubSubcategoria::select('id', 'name', 'subcategoria_id')->orderBy('id')->get();
+
+        return response()->json($subsubcategorias);
     }
 
     /**

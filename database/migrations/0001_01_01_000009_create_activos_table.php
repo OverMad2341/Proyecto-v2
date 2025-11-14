@@ -13,39 +13,38 @@ return new class extends Migration
     {
         Schema::create('activos', function (Blueprint $table) {
             $table->id();
-            $table->string('codigo', 100);
-            $table->string('name', 100)->nullable();
-            $table->string('serial', 100);
-            $table->string('marca', 100)->nullable();
+            $table->string('codigo', 100)->nullable();
+            $table->string('serial', 100)->nullable();
+            $table->string('marca', 100);
             $table->string('modelo', 100)->nullable();
-            $table->string('color', 100);
-            $table->string('estado', 100)->nullable();
+            $table->string('color', 100)->nullable();
+            $table->string('estado', 100);
             $table->unsignedBigInteger('empleado')->nullable();
             $table->foreign('empleado')
                 ->references('id')
                 ->on('empleados')
                 ->onDelete('cascade');
-            $table->unsignedBigInteger('ubicacion')->nullable();
+            $table->unsignedBigInteger('ubicacion');
             $table->foreign('ubicacion')
                 ->references('id')
                 ->on('gerencias')
                 ->onDelete('cascade');
-            $table->unsignedBigInteger('categoria_id')->nullable();
+            $table->unsignedBigInteger('categoria_id');
             $table->foreign('categoria_id')
                 ->references('id')
                 ->on('categorias')
                 ->onDelete('cascade');
-            $table->unsignedBigInteger('subcategoria_id')->nullable();
+            $table->unsignedBigInteger('subcategoria_id');
             $table->foreign('subcategoria_id')
                 ->references('id')
                 ->on('subcategorias')
                 ->onDelete('cascade');
-            $table->unsignedBigInteger('sub_subcategoria_id');
-            $table->foreign('sub_subcategoria_id')
+            $table->unsignedBigInteger('subsubcategoria_id');
+            $table->foreign('subsubcategoria_id')
                 ->references('id')
                 ->on('subsubcategorias')
                 ->onDelete('cascade');
-            $table->string('description', 255);
+            $table->string('description', 255)->nullable();
             $table->timestamps();
         });
     }

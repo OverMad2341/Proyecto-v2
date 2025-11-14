@@ -3,6 +3,10 @@
 use App\Http\Controllers\ActivosController;
 use App\Http\Controllers\EmpleadosController;
 use App\Http\Controllers\GerenciasController;
+use App\Http\Controllers\SubcategoriaController;
+use App\Http\Controllers\SubSubcategoriaController;
+use App\Http\Controllers\CategoriaController;
+
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -14,22 +18,24 @@ Route::get('dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('Activos', function () {
+Route::get('activos', function () {
     return Inertia::render('activos/Activos');
-})->middleware(['auth', 'verified'])->name('Activos');
+})->middleware(['auth', 'verified'])->name('activos');
 
 Route::middleware('auth', 'verified')->group(function () {
-    Route::get('/ListaActivos', [ActivosController::class, 'index'])->name('activos.index');
-    Route::get('/Activos/create', [ActivosController::class, 'create'])->name('activos.create');
-    Route::post('/Activos', [ActivosController::class, 'store'])->name('activos.store');
-    Route::get('/Activos/{activo}/edit', [ActivosController::class, 'edit'])->name('activos.edit');
-    Route::put('/Activos/{activo}', [ActivosController::class, 'update'])->name('activos.update');
-    Route::delete('/Activos/{activo}', [ActivosController::class, 'destroy'])->name('activos.destroy');
-    // Endpoint para obtener empleados (usado por el formulario de activos)
-    Route::get('/empleados', [EmpleadosController::class, 'index'])->name('empleados.index');
-    Route::get('/gerencias', [GerenciasController::class, 'index'])->name('gerencias.index');
+    Route::resource('Activo', ActivosController::class)
+        ->parameters(['Activo' => 'activo']);
+    Route::resource('empleados', EmpleadosController::class)
+        ->parameters(['empleados' => 'empleado']);
+    Route::resource('gerencias', GerenciasController::class)
+        ->parameters(['gerencias' => 'gerencia']);
+    Route::resource('categorias', CategoriaController::class)
+        ->parameters(['categorias' => 'categoria']);
+    Route::resource('subcategorias', SubcategoriaController::class)
+        ->parameters(['subcategorias' => 'subcategoria']);
+    Route::resource('subsubcategorias', SubSubcategoriaController::class)
+        ->parameters(['subsubcategorias' => 'subsubcategoria']);
 });
-
 
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';

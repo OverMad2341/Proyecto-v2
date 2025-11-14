@@ -14,6 +14,7 @@ class GerenciasSeeder extends Seeder
     public function run(): void
     {
         DB::table('gerencias')->insert([
+            ['name' => 'Presidencia'],
             ['name' => 'Gerencia de Tecnología y Operaciones'],
             ['name' => 'Gerencia de Administracion'],
             ['name' => 'Gerencia de Recursos Humanos'],
@@ -26,7 +27,7 @@ class GerenciasSeeder extends Seeder
             ['name' => 'Gerencia de Atención al Cuidadano'],
             ['name' => 'Gerencia de Consultoria Juridica'],
             ['name' => 'Gerencia de Modelado de Procesos'],
-            ['name' => 'Presidencia'],
+            ['name' => 'Almacen'],
         ]);
     }
 }

@@ -7,7 +7,7 @@ import { Link } from '@inertiajs/vue3';
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Activos',
-        href: '/Activos',
+        href: '/activos',
     },
 ];
 
@@ -22,7 +22,7 @@ const breadcrumbs: BreadcrumbItem[] = [
 
       <!-- Lista de activos -->
       <Link
-        :href="'/ListaActivos'"
+        :href="'/Activo'"
         class="relative flex-1 rounded-xl border border-sidebar-border/70 md:min-h-min dark:border-sidebar-border group overflow-auto bg-white/40 dark:bg-black/20">
         <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0">
           <img src="/iconcnti.svg" alt="Logo CNTI"
@@ -44,7 +44,7 @@ const breadcrumbs: BreadcrumbItem[] = [
 
       <!-- Crear o Modificar activos -->
       <Link
-        :href="'Activos/create'"
+        :href="'Activo/create'"
         class="relative flex-1 rounded-xl border border-sidebar-border/70 md:min-h-min dark:border-sidebar-border group overflow-auto bg-white/40 dark:bg-black/20">
 
       <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0">

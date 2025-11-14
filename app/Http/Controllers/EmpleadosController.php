@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Empleados;
+use App\Models\Empleado;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Response;
@@ -16,7 +16,7 @@ class EmpleadosController extends Controller
     {
         // Devuelve una lista simple de empleados en JSON
         // Seleccionamos solo los campos necesarios para el select
-        $empleados = Empleados::select('id', 'name', 'surname', 'cedula')->orderBy('name')->get();
+        $empleados = Empleado::select('id', 'name', 'surname', 'cedula')->orderBy('name')->get();
 
         return response()->json($empleados);
     }
@@ -40,7 +40,7 @@ class EmpleadosController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Empleados $empleados)
+    public function show(Empleado $empleados)
     {
         
     }
@@ -48,7 +48,7 @@ class EmpleadosController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Empleados $empleados)
+    public function edit(Empleado $empleados)
     {
         //
     }
@@ -56,7 +56,7 @@ class EmpleadosController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Empleados $empleados)
+    public function update(Request $request, Empleado $empleados)
     {
         //
     }
@@ -64,7 +64,7 @@ class EmpleadosController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Empleados $empleados)
+    public function destroy(Empleado $empleados)
     {
         //
     }

@@ -2,8 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Activos;
+use App\Models\Activo;
+use App\Models\Empleado;
+use App\Models\Gerencia;
+use App\Models\Categoria;
+use App\Models\Subcategoria;
+use App\Models\SubSubcategoria;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 
 class ActivosController extends Controller
@@ -14,7 +20,7 @@ class ActivosController extends Controller
     public function index()
     {
         return Inertia::render('activos/List', [
-            'activos' => Activos::all(),
+            'activos' => Activo::all(),
             // 'activos' => Activos::paginate(10),
         ]);
     }
@@ -33,27 +39,26 @@ class ActivosController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'codigo' => 'required|string|max:255',
-            'name' => 'required|string|max:255',
-            'serial' => 'required|string|max:255',
-            'marca' => 'required|string|max:255',
-            'modelo' => 'required|string|max:255',
-            'color' => 'required|string|max:255',
-            'estado' => 'required|string|max:255',
-            'empleado' => 'required|interger',
-            'ubicacion' => 'required|interger',
-            'categoria_id' => 'required|integer',
-            'subcategoria_id' => 'required|integer',
-            'sub_subcategoria_id' => 'required|integer',
+            'codigo' => 'required|string|numeric',
+            'serial' => 'nullable|string|max:100',
+            'marca' => 'required|string|max:100',
+            'modelo' => 'required|string|max:100',
+            'color' => 'nullable|string|max:100',
+            'estado' => 'required|string|max:100',
+            'empleado' => 'nullable|integer|exists:empleados,id',
+            'ubicacion' => 'required|integer|exists:gerencias,id',
+            'categoria_id' => 'required|integer|exists:categorias,id',
+            'subcategoria_id' => 'required|integer|exists:subcategorias,id',
+            'subsubcategoria_id' => 'required|integer|exists:subsubcategorias,id',
         ]);
-        Activos::create($request->all());
-        return redirect()->route('activos.index');
+        Activo::create($request->all());
+        return redirect()->route('Activo.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Activos $activos)
+    public function show(Activo $activos)
     {
         //
     }
@@ -61,23 +66,49 @@ class ActivosController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Activos $activos)
+    public function edit(Activo $activo)
     {
-        //
+        return Inertia::render('activos/Edit', [
+            // 1. El activo específico que estamos editando
+            'activo' => $activo,
+
+            // 2. Todas las listas que tus <Select> necesitan
+            // (Optimizamos para traer solo las columnas necesarias)
+            'empleados' => Empleado::all(['id', 'name', 'surname', 'cedula']),
+            'gerencias' => Gerencia::all(['id', 'name']),
+            'categorias' => Categoria::all(['id', 'name']),
+            'subcategorias' => Subcategoria::all(['id', 'name', 'categoria_id']),
+            'subsubcategorias' => SubSubcategoria::all(['id', 'name', 'subcategoria_id']), 
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Activos $activos)
+    public function update(Request $request, Activo $activo)
     {
-        //
+
+        $validatedData = $request->validate([
+            'codigo' => ['required|string|numeric', Rule::unique('activos')->ignore($activo->id),],
+            'serial' => 'nullable|string|max:100',
+            'marca' => 'required|string|max:100',
+            'modelo' => 'required|string|max:100',
+            'color' => 'nullable|string|max:100',
+            'estado' => 'required|string|max:100',
+            'empleado' => 'nullable|integer|exists:empleados,id',
+            'ubicacion' => 'required|integer|exists:gerencias,id',
+            'categoria_id' => 'required|integer|exists:categorias,id',
+            'subcategoria_id' => 'required|integer|exists:subcategorias,id',
+            'subsubcategoria_id' => 'required|integer|exists:subsubcategorias,id',
+        ]);
+        $activo->update($validatedData);
+        return redirect()->route('Activo.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Activos $activos)
+    public function destroy(Activo $activos)
     {
         //
     }

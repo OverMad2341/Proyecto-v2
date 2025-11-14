@@ -28,7 +28,7 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'Activos',
-        href: '/Activos',
+        href: '/activos',
         icon: ClipboardList,
     },
 ];

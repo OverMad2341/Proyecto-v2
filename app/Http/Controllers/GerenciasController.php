@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Gerencias;
+use App\Models\Gerencia;
 use Illuminate\Http\Request;
 
 class GerenciasController extends Controller
@@ -12,7 +12,7 @@ class GerenciasController extends Controller
      */
     public function index()
     {
-        $ubicacion = Gerencias::select('id', 'name' )->orderBy('name')->get();
+        $ubicacion = Gerencia::select('id', 'name' )->orderBy('id')->get();
 
         return response()->json($ubicacion);
     }
@@ -36,7 +36,7 @@ class GerenciasController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Gerencias $gerencias)
+    public function show(Gerencia $gerencias)
     {
         //
     }
@@ -44,7 +44,7 @@ class GerenciasController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Gerencias $gerencias)
+    public function edit(Gerencia $gerencias)
     {
         //
     }
@@ -52,7 +52,7 @@ class GerenciasController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Gerencias $gerencias)
+    public function update(Request $request, Gerencia $gerencias)
     {
         //
     }
@@ -60,7 +60,7 @@ class GerenciasController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Gerencias $gerencias)
+    public function destroy(Gerencia $gerencias)
     {
         //
     }

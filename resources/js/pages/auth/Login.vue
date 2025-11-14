@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref } from 'vue';
 import { Head, useForm } from '@inertiajs/vue3';
 import VueHcaptcha from '@hcaptcha/vue3-hcaptcha';
 
