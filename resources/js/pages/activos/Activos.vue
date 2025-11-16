@@ -66,7 +66,7 @@ const breadcrumbs: BreadcrumbItem[] = [
       </Link>
 
       <!-- Importar activos -->
-      <Link
+      <!-- <Link
         class="relative flex-1 rounded-xl border border-sidebar-border/70 md:min-h-min dark:border-sidebar-border group overflow-auto bg-white/40 dark:bg-black/20">
 
       <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0">
@@ -85,7 +85,7 @@ const breadcrumbs: BreadcrumbItem[] = [
           </div>
         </div>
       </div>
-      </Link>
+      </Link> -->
       
     </div>
   </AppLayout>

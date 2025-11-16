@@ -46,11 +46,11 @@ export interface Activo {
     modelo: string;
     color?: string | null;
     estado: string;
-    empleado: number;
-    ubicacion: string;
-    categoria_id: number;
-    subcategoria_id: number;
-    subsubcategoria_id: number;
+    empleado: Empleado | null;
+    ubicacion: Ubicacion;
+    categoria: Categoria;
+    subcategoria_id: SubCategoria;
+    subsubcategoria_id: SubSubCategoria;
 }
 
 export interface Empleado {

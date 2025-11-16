@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Empleados;
+use App\Models\Empleado;
 use App\Models\User;
 use Faker\Provider\sv_SE\Municipality;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Empleados::factory(10)->create();
+        Empleado::factory(10)->create();
         
         $this->call([
         UsersSeeder::class,

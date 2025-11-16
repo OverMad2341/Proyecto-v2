@@ -19,9 +19,10 @@ class ActivosController extends Controller
      */
     public function index()
     {
+        $activos = Activo::with(['ubicacion', 'empleado', 'categoria'])->get();
+
         return Inertia::render('activos/List', [
-            'activos' => Activo::all(),
-            // 'activos' => Activos::paginate(10),
+            'activos' => $activos,
         ]);
     }
 
