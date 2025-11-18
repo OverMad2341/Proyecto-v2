@@ -14,8 +14,8 @@ class DashboardController extends Controller
     {
         // --- 1. Cálculos de Stats (de la respuesta anterior) ---
         $totalActivos = Activo::count();
-        $enUso = Activo::whereNotNull('empleado')->count();
-        $enAlmacen = Activo::whereNull('empleado')->count();
+        $enUso = Activo::whereNotNull('empleado_id')->count();
+        $enAlmacen = Activo::whereNull('empleado_id')->count();
 
         // --- 2. Nuevos Cálculos para el Gráfico (Últimos 12 meses) ---
         $endDate = Carbon::now();
@@ -58,6 +58,8 @@ class DashboardController extends Controller
         $editadosLookup = $editados->keyBy(fn($item) => "{$item->year}-{$item->month}");
 
         foreach ($period as $date) {
+            /** @var \Carbon\Carbon $date */ // <-- ¡ESTA LÍNEA ES LA CORRECCIÓN!
+            
             $year = $date->year;
             $month = $date->month;
             // Corregimos el formato de la clave para que coincida con strftime('%m') (ej: 01, 02)
