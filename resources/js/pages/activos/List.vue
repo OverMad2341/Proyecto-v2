@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, h, ref } from 'vue';
-import { Head, usePage, Link, router } from '@inertiajs/vue3';
+import { Head, usePage, Link } from '@inertiajs/vue3';
 import { Activo, type BreadcrumbItem, type AppPageProps } from '@/types';
 import AppLayout from '@/layouts/AppLayout.vue';
 
@@ -10,6 +10,7 @@ import type {
     ColumnFiltersState,
     SortingState,
     VisibilityState,
+    Updater, // <--- 1. Importar el tipo 'Updater'
 } from "@tanstack/vue-table"
 import {
     FlexRender,
@@ -127,7 +128,7 @@ const columns: ColumnDef<Activo>[] = [
                 onClick: () => column.toggleSorting(column.getIsSorted() === "asc"),
             }, () => ["Empleado", h(ArrowUpDown, { class: "ml-2 h-4 w-4" })])
         },
-        cell: ({ row }) => h("div", {}, row.original.empleado?.name ?? 'En almacen'),
+        cell: ({ row }) => h("div", {}, row.original.empleado?.name ? row.original.empleado?.name + ' ' + row.original.empleado?.surname : 'En almacen'),
     },
     {
         id: "ubicacion",
@@ -187,7 +188,7 @@ const columns: ColumnDef<Activo>[] = [
 const sorting = ref<SortingState>([])
 const columnFilters = ref<ColumnFiltersState>([])
 const columnVisibility = ref<VisibilityState>({})
-const rowSelection = ref({})
+const rowSelection = ref<Record<string, boolean>>({}) // <--- 2. Especificar el tipo del ref
 
 // --- Instancia de la Tabla (de tu ejemplo, pero con 'data' y 'columns' adaptados) ---
 const table = useVueTable({
@@ -199,10 +200,12 @@ const table = useVueTable({
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
-    onSortingChange: updaterOrValue => valueUpdater(updaterOrValue, sorting),
-    onColumnFiltersChange: updaterOrValue => valueUpdater(updaterOrValue, columnFilters),
-    onColumnVisibilityChange: updaterOrValue => valueUpdater(updaterOrValue, columnVisibility),
-    onRowSelectionChange: updaterOrValue => valueUpdater(updaterOrValue, rowSelection),
+
+    // --- 3. Tipar explícitamente 'updaterOrValue' para evitar 'any' ---
+    onSortingChange: (updaterOrValue: Updater<SortingState>) => valueUpdater(updaterOrValue, sorting),
+    onColumnFiltersChange: (updaterOrValue: Updater<ColumnFiltersState>) => valueUpdater(updaterOrValue, columnFilters),
+    onColumnVisibilityChange: (updaterOrValue: Updater<VisibilityState>) => valueUpdater(updaterOrValue, columnVisibility),
+    onRowSelectionChange: (updaterOrValue: Updater<Record<string, boolean>>) => valueUpdater(updaterOrValue, rowSelection),
     state: {
         get sorting() { return sorting.value },
         get columnFilters() { return columnFilters.value },
@@ -224,7 +227,7 @@ const table = useVueTable({
             <div class="flex items-center py-4">
                 <Input class="max-w-sm" placeholder="Filtrar por código..."
                     :model-value="table.getColumn('codigo')?.getFilterValue() as string"
-                    @update:model-value=" table.getColumn('codigo')?.setFilterValue($event)" />
+                    @update:model-value="(value: string) => table.getColumn('codigo')?.setFilterValue(value)" />
                 <DropdownMenu>
                     <DropdownMenuTrigger as-child>
                         <Button variant="outline" class="ml-auto">

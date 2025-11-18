@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\EmailVerificationController;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -59,11 +60,19 @@ class RegisteredUserController extends Controller
         ]);
 
         event(new Registered($user));
-
+        
+        // --- ¡¡ESTA ES LA LÍNEA QUE FALTABA!! ---
+        // Loguear al usuario inmediatamente
         Auth::login($user);
 
-        $request->session()->regenerate();
+        // --- AÑADE ESTO ---
+        // 1. Prepara la solicitud para enviar el código
+        $verificationRequest = new Request(['email' => $user->email]);
 
-        return to_route('dashboard');
+        // 2. Llama a tu controlador para enviar el correo
+        app(EmailVerificationController::class)->sendCode($verificationRequest);
+
+        // 3. Redirige a la página de verificación en lugar de al dashboard
+        return redirect()->route('verification.notice', ['email' => $user->email]);
     }
 }

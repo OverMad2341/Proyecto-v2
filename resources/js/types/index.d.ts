@@ -83,3 +83,9 @@ export interface SubSubCategoria {
     name: string;
     subcategoria_id: number;
 }
+
+export interface DashboardStats {
+    total: number;
+    enUso: number;
+    enAlmacen: number;
+}
