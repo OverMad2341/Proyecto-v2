@@ -21,18 +21,18 @@ interface AuthConfigContent {
 const authConfigContent = computed<AuthConfigContent>(() => {
     if (showRecoveryInput.value) {
         return {
-            title: 'Recovery Code',
+            title: 'Código de recuperación',
             description:
-                'Please confirm access to your account by entering one of your emergency recovery codes.',
-            toggleText: 'login using an authentication code',
+                'Confirma el acceso a tu cuenta ingresando uno de tus códigos de recuperación de emergencia.',
+            toggleText: 'iniciar sesión con un código de autenticación',
         };
     }
 
     return {
-        title: 'Authentication Code',
+        title: 'Código de autenticación',
         description:
-            'Enter the authentication code provided by your authenticator application.',
-        toggleText: 'login using a recovery code',
+            'Ingresa el código de autenticación proporcionado por tu aplicación de autenticación.',
+        toggleText: 'iniciar sesión con un código de recuperación',
     };
 });
 
@@ -53,7 +53,7 @@ const codeValue = computed<string>(() => code.value.join(''));
         :title="authConfigContent.title"
         :description="authConfigContent.description"
     >
-        <Head title="Two-Factor Authentication" />
+        <Head title="Autenticación de dos factores" />
 
         <div class="space-y-6">
             <template v-if="!showRecoveryInput">

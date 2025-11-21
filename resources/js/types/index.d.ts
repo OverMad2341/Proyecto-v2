@@ -46,8 +46,8 @@ export interface Activo {
     modelo: string;
     color?: string | null;
     estado: string;
-    empleado: Empleado | null;
-    ubicacion: Ubicacion;
+    custodio: Empleado | null;
+    gerencia: Ubicacion;
     categoria: Categoria;
     subcategoria_id: SubCategoria;
     subsubcategoria_id: SubSubCategoria;

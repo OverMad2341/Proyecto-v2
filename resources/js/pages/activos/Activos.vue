@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue';
 import { type BreadcrumbItem } from '@/types';
-import { Form, Head } from '@inertiajs/vue3';
+import { Head } from '@inertiajs/vue3';
 import { Link } from '@inertiajs/vue3';
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -23,7 +23,7 @@ const breadcrumbs: BreadcrumbItem[] = [
       <!-- Lista de activos -->
       <Link
         :href="'/Activo'"
-        class="relative flex-1 rounded-xl border border-sidebar-border/70 md:min-h-min dark:border-sidebar-border group overflow-auto bg-white/40 dark:bg-black/20">
+        class="relative flex-1 rounded-xl border border-sidebar-border/70 md:min-h-min dark:border-sidebar-border group overflow-auto bg-white/40 dark:bg-black/20 hover:bg-white/60 dark:hover:bg-black/30 transition-colors">
         <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0">
           <img src="/iconcnti.svg" alt="Logo CNTI"
             class="opacity-25 group-hover:scale-115 transition-all delay-150 duration-300 ease-in-out">
@@ -35,17 +35,17 @@ const breadcrumbs: BreadcrumbItem[] = [
             </div>
             <div class="text-lg">
               <span class="mb-0.5 truncate leading-tight italic whitespace-break-spaces">
-                Lista controlada de recursos tecnológicos, inmuebles y equipos, para gestionar y proteger el valor.
+                Lista controlada de recursos tecnológicos, inmuebles y equipos.
               </span>
             </div>
           </div>
         </div>
       </Link>
 
-      <!-- Crear o Modificar activos -->
+      <!-- Crear activos -->
       <Link
         :href="'Activo/create'"
-        class="relative flex-1 rounded-xl border border-sidebar-border/70 md:min-h-min dark:border-sidebar-border group overflow-auto bg-white/40 dark:bg-black/20">
+        class="relative flex-1 rounded-xl border border-sidebar-border/70 md:min-h-min dark:border-sidebar-border group overflow-auto bg-white/40 dark:bg-black/20 hover:bg-white/60 dark:hover:bg-black/30 transition-colors">
 
       <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0">
         <img src="/iconcnti.svg" alt="Logo CNTI"
@@ -58,16 +58,17 @@ const breadcrumbs: BreadcrumbItem[] = [
           </div>
           <div class="text-lg">
             <span class="mb-0.5 truncate leading-tight italic whitespace-break-spaces">
-              Agregar activos para llevar un control de los bienes de la empresa.
+              Agregar activos para llevar un control de los bienes.
             </span>
           </div>
         </div>
       </div>
       </Link>
 
-      <!-- Importar activos -->
-      <!-- <Link
-        class="relative flex-1 rounded-xl border border-sidebar-border/70 md:min-h-min dark:border-sidebar-border group overflow-auto bg-white/40 dark:bg-black/20">
+      <!-- Importar activos (Habilitado) -->
+      <Link
+        :href="'activos/import'" 
+        class="relative flex-1 rounded-xl border border-sidebar-border/70 md:min-h-min dark:border-sidebar-border group overflow-auto bg-white/40 dark:bg-black/20 hover:bg-white/60 dark:hover:bg-black/30 transition-colors">
 
       <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0">
         <img src="/iconcnti.svg" alt="Logo CNTI"
@@ -80,12 +81,12 @@ const breadcrumbs: BreadcrumbItem[] = [
           </div>
           <div class="text-lg">
             <span class="mb-0.5 truncate leading-tight italic whitespace-break-spaces">
-              Agregar nuevos activos a traves de un archivos exel o libreoffice.
+              Carga masiva mediante archivos Excel o LibreOffice.
             </span>
           </div>
         </div>
       </div>
-      </Link> -->
+      </Link>
       
     </div>
   </AppLayout>

@@ -3,10 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
 use App\Models\Empleado; 
 use App\Models\Gerencia;
 use App\Models\Categoria;
+use App\Models\Subcategoria; // Asegúrate de tener este modelo
+use App\Models\Subsubcategoria; // Asegúrate de tener este modelo
 
 class Activo extends Model
 {
@@ -25,28 +26,36 @@ class Activo extends Model
         'subsubcategoria_id',
     ];
 
-    public function ubicacion()
+    public function gerencia()
     {
-        // 1er arg: El modelo al que se conecta
-        // 2do arg: El nombre de la columna FK en ESTA tabla ('activos')
+        // 2do arg: 'ubicacion' es el nombre de la columna en la tabla activos
         return $this->belongsTo(Gerencia::class, 'ubicacion');
     }
 
-    /**
-     * Define la relación con Empleado.
-     */
-    public function empleado()
+    // Antes: empleado(). Ahora: custodio()
+    public function custodio()
     {
-        // La FK se llama 'empleado'
         return $this->belongsTo(Empleado::class, 'empleado');
     }
 
-    /**
-     * Define la relación con Categoria.
-     */
     public function categoria()
     {
-        // La FK se llama 'categoria_id'
         return $this->belongsTo(Categoria::class, 'categoria_id');
+    }
+
+    /**
+     * Relación con Subcategoría
+     */
+    public function subcategoria()
+    {
+        return $this->belongsTo(Subcategoria::class, 'subcategoria_id');
+    }
+
+    /**
+     * Relación con Subsubcategoría
+     */
+    public function subsubcategoria()
+    {
+        return $this->belongsTo(Subsubcategoria::class, 'subsubcategoria_id');
     }
 }

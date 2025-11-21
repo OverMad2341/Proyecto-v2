@@ -41,11 +41,11 @@ const form = useForm({
 
     // Usamos 'as number | null' para FKs opcionales
     // y dejamos los requeridos tal cual.
-    empleado: props.activo.empleado as number | null, 
-    ubicacion: props.activo.ubicacion, 
-    categoria_id: props.activo.categoria_id,
+    empleado: props.activo.custodio as number | null, 
+    ubicacion: props.activo.gerencia, 
+    categoria_id: props.activo.categoria,
     subcategoria_id: props.activo.subcategoria_id as number | null,
-    sub_subcategoria_id: props.activo.subsubcategoria_id as number | null,
+    subsubcategoria_id: props.activo.subsubcategoria_id as number | null,
 });
 
 // 3. FUNCIÓN DE ENVÍO
@@ -85,11 +85,11 @@ const isAlmacenSelected = computed(() => {
 // Watchers (ahora funcionan porque 'as number | null' lo permite)
 watch(() => form.categoria_id, () => {
     form.subcategoria_id = null;
-    form.sub_subcategoria_id = null;
+    form.subsubcategoria_id = null;
 });
 
 watch(() => form.subcategoria_id, () => {
-    form.sub_subcategoria_id = null;
+    form.subsubcategoria_id = null;
 });
 
 watch(isAlmacenSelected, (isAlmacen) => {
@@ -200,7 +200,7 @@ watch(() => form.codigo, (newValue) => {
 
                             <div class="grid gap-2">
                                 <Label for="sub_subcategoria_id">Sub-subcategoria</Label>
-                                <Select id="sub_subcategoria_id" v-model="form.sub_subcategoria_id"
+                                <Select id="sub_subcategoria_id" v-model="form.subsubcategoria_id"
                                     :disabled="!form.subcategoria_id || filteredSubSubCategorias.length === 0">
                                     <SelectTrigger><SelectValue placeholder="Sub-subcategoria" /></SelectTrigger>
                                     <SelectContent>
@@ -212,7 +212,7 @@ watch(() => form.codigo, (newValue) => {
                                         </SelectGroup>
                                     </SelectContent>
                                 </Select>
-                                <InputError class="mt-2" :message="form.errors.sub_subcategoria_id" />
+                                <InputError class="mt-2" :message="form.errors.subsubcategoria_id" />
                             </div>
 
                             <div class="grid gap-2">
